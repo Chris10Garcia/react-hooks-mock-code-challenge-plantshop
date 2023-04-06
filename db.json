@@ -41,6 +41,12 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "name": "Dracaena",
+      "image": "https://www.ikea.com/us/en/images/products/dracaena-marginata-potted-plant-dragon-tree-3-stem__67436_pe181279_s5.jpg",
+      "price": "12.99",
+      "id": 8
     }
   ]
 }

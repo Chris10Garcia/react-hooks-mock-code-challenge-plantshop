@@ -1,16 +1,25 @@
 import React from "react";
 
-function PlantCard() {
+function PlantCard({plant}) {
+  const {id, name, image, price} = plant
+
+
+  function toggleStock(e){
+    if (e.target.className === "primary"){
+      e.target.className = ""
+      e.target.innerText = "Out of Stock"
+    } else {
+      e.target.className = "primary"
+      e.target.innerText = "In Stock"
+    }
+  }
+
   return (
-    <li className="card">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+    <li id = {id} className="card">
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
+      <p>Price: {price}</p>
+      <button onClick = {toggleStock} className="primary">In Stock</button>
     </li>
   );
 }
