@@ -18,6 +18,8 @@ function PlantPage() {
 
 
   function addPlants(formData){
+    formData.price = parseFloat(formData.price)
+
     fetch(jsonURL,{
       method: "POST",
       headers: {"Content-Type" : "application/json"},
@@ -26,6 +28,32 @@ function PlantPage() {
     .then(r => r.json())
     .then(data => setPlantsData([...plantsData, data]))
   }
+
+
+  function deletePlants(id){
+    fetch(jsonURL + "/" + id, {
+      method: "DELETE",
+      headers: {"Content-Type" : "application/json"}
+    })
+    .then(()=> {
+      const newPlantDataList = plantsData.filter(plant => plant.id !== id)
+      setPlantsData(newPlantDataList)
+    })
+  }
+
+  async function updatePlantPrice(value, id){
+    await fetch(jsonURL + "/" + id, {
+      method: "PATCH",
+      headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify({price : parseFloat(value)})
+    })
+    .then(r => r.json())
+    .then(data => {
+      const newplantsData = plantsData.map(plant => {return plant.id === id ? data : plant})
+      setPlantsData(newplantsData)
+    })
+  }
+
 
   function handleOnChangeSearch(e){
     setSearchValue(e.target.value)
@@ -39,7 +67,7 @@ function PlantPage() {
     <main>
       <NewPlantForm addPlants={addPlants}/>
       <Search handleOnChangeSearch={handleOnChangeSearch} />
-      <PlantList plantsData={filteredPlantsData}/>
+      <PlantList updatePlantPrice={updatePlantPrice} plantsData={filteredPlantsData} handleOnClickDelete={deletePlants}/>
     </main>
   );
 }

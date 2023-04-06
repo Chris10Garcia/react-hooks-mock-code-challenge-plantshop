@@ -1,0 +1,12 @@
+
+
+
+
+index.js
+    |--- App
+        |--- Header 
+        |--- PlantPage [plantsArray, searchData]
+            |--- NewPlantForm [formData]
+            |--- Search 
+            |--- PlantList 
+                |--- PlantCard
